@@ -1,13 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
 import List from "./List";
-class CurrentStudentsList extends Component {
-  render() {
-    return (
-      <div>
-        <List />
-      </div>
-    );
-  }
-}
+const CurrentStudentsList = (props) => {
+  return (
+    <div>
+      <List graduated={false} />
+    </div>
+  );
+};
 
 export default CurrentStudentsList;

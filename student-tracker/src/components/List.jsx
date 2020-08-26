@@ -3,6 +3,7 @@ import * as api from "../utils/api";
 class List extends React.Component {
   state = {
     students: [],
+    graduated: null,
   };
   componentDidMount() {
     api.getAllStudents().then((students) => this.setState({ students }));
@@ -18,7 +19,7 @@ class List extends React.Component {
               <li key={student._id}>
                 <p>Name: {student.name}</p>
                 <p>Cohort: {student.startingCohort}</p>
-                <p>Block: {student.currentBlock}</p>
+                {!this.graduated && <p>Block: {student.currentBlock}</p>}
               </li>
             );
           })}
