@@ -3,8 +3,7 @@ import "./App.css";
 import Title from "./components/Title";
 import Nav from "./components/Nav";
 import List from "./components/List";
-import CurrentStudentsList from "./components/CurrentStudentsList";
-import GraduateStudentsList from "./components/GraduateStudentsList";
+import FilterBar from "./components/Filterbar";
 import { Router } from "@reach/router";
 
 function App(props) {
@@ -12,10 +11,11 @@ function App(props) {
     <div className="App">
       <Title />
       <Nav />
+      {/* <FilterBar /> */}
+
       <Router>
         <List path="/" />
-        <List path="/current" graduated={false} />
-        <GraduateStudentsList path="/graduates" />
+        <List path="/:graduated" />
       </Router>
     </div>
   );

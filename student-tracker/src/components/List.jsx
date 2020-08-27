@@ -4,22 +4,49 @@ class List extends React.Component {
   state = {
     students: [],
     graduated: null,
+    // cohort: null,
   };
 
+  fetchStudents = (areGraduates, cohort) => {
+    return api
+      .getAllStudents(areGraduates, cohort)
+      .then((students) => this.setState({ students }));
+  };
+
+  handleChange = (changeEvent) => {
+    const cohort = Number(changeEvent.target.value);
+    this.setState({ cohort: cohort });
+    this.fetchStudents(this.state.graduated, this.state.cohort);
+  };
   componentDidMount() {
-    api.getAllStudents().then((students) => this.setState({ students }));
+    const areGraduates =
+      this.props.graduated === "graduates"
+        ? true
+        : this.props.graduated === "current"
+        ? false
+        : null;
+    this.fetchStudents(areGraduates, this.state.cohort);
   }
-  componentDidUpdate(props) {
-    // console.log(props.graduated);
-    if (props.graduated === false) {
-      this.setState({ graduated: false });
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.graduated !== this.props.graduated) {
+      const areGraduates =
+        this.props.graduated === "graduates"
+          ? true
+          : this.props.graduated === "current"
+          ? false
+          : null;
+      this.fetchStudents(areGraduates, this.state.cohort);
     }
   }
+
   render() {
-    // console.dir(props);
     const students = this.state.students;
     return (
       <div>
+        <form>
+          <label htmlFor="cohort">Starting Cohort</label>
+          <input id="cohort" onChange={this.handleChange} type="number" />
+        </form>
         <ul>
           {students.map((student) => {
             return (
