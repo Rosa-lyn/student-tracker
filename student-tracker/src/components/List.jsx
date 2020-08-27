@@ -5,11 +5,18 @@ class List extends React.Component {
     students: [],
     graduated: null,
   };
+
   componentDidMount() {
     api.getAllStudents().then((students) => this.setState({ students }));
   }
-
+  componentDidUpdate(props) {
+    // console.log(props.graduated);
+    if (props.graduated === false) {
+      this.setState({ graduated: false });
+    }
+  }
   render() {
+    // console.dir(props);
     const students = this.state.students;
     return (
       <div>

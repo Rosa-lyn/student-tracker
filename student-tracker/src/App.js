@@ -14,7 +14,7 @@ function App(props) {
       <Nav />
       <Router>
         <List path="/" />
-        <CurrentStudentsList path="/current" graduated={false} />
+        <List path="/current" graduated={false} />
         <GraduateStudentsList path="/graduates" />
       </Router>
     </div>
